@@ -1,0 +1,42 @@
+{
+    "name": "4yf",
+    "version": "0.1.0",
+    "description": "For Your Feed",
+    "authors": [
+        "Andy Tang (EnoF)"
+    ],
+    "devDependencies": {
+        "connect-livereload": "^0",
+        "grunt": "^0",
+        "grunt-angular-templates": "^0",
+        "grunt-concurrent": "^0",
+        "grunt-contrib-connect": "^0",
+        "grunt-contrib-copy": "^0",
+        "grunt-contrib-jshint": "^0",
+        "grunt-contrib-less": "^0",
+        "grunt-contrib-uglify": "^0",
+        "grunt-contrib-watch": "^0",
+        "grunt-karma-coveralls": "^2",
+        "grunt-groc": "^0",
+        "grunt-karma": "^0",
+        "grunt-processhtml": "^0",
+        "grunt-version": "^0",
+        "load-grunt-tasks": "^0",
+        "karma": "^0",
+        "karma-coverage": "^0",
+        "karma-jasmine": "^0",
+        "karma-phantomjs-launcher": "^0",
+        "time-grunt": "^0"
+    },
+    "engines": {
+        "node": "^0",
+        "npm": "^0"
+    },
+    "scripts": {
+        "test": "grunt test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:EnoF/4YF.git"
+    }
+}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!--
+  ~ For Your Feed (4YF)
+  ~ Version: 0.0.1
+  ~
+  ~ Copyright (c) 2014.
+  -->
+<ul>
+    <li data-ng-repeat="message in messages">
+        <dl>
+            <dt>{{ message.getUser().getUserName() }}</dt>
+            <dd>{{ message.getMessage() }}</dd>
+        </dl>
+    </li>
+</ul>
