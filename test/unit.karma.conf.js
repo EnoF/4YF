@@ -15,18 +15,20 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'src/bower_components/angular/angular.js',
-            'src/bower_components/angular-mocks/angular-mocks.js',
-            'src/bower_components/enofjs/src/ClassFactory.js',
-            'src/bower_components/enofjs/src/whereIt.js',
-            'src/app.js',
-            'src/models/**/*.js',
-            'src/viewModels/**/*.js',
+            'src/public/bower_components/angular/angular.js',
+            'src/public/bower_components/angular-mocks/angular-mocks.js',
+            'src/public/bower_components/enofjs/src/ClassFactory.js',
+            'src/public/bower_components/enofjs/src/whereIt.js',
+            'src/public/app.js',
+            'src/core/models/**/*.js',
+            'src/public/viewModels/**/*.js',
             'test/unit/**/*.js'
         ],
 
         // list of files / patterns to exclude
-        exclude: [],
+        exclude: [
+            'test/unit/server/**/*.js'
+        ],
 
         // web server port
         port: 13337,

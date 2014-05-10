@@ -44,7 +44,8 @@ module.exports = function (grunt) {
                         return [
                             lrSnippet,
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'src')
+                            mountFolder(connect, 'src/core'),
+                            mountFolder(connect, 'src/public')
                         ];
                     }
                 }
@@ -54,7 +55,8 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'src')
+                            mountFolder(connect, 'src/core'),
+                            mountFolder(connect, 'src/public')
                         ];
                     }
                 }
@@ -75,8 +77,8 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         dot: true,
-                        cwd: '<%= yeoman.app %>',
-                        dest: '<%= yeoman.dist %>',
+                        cwd: 'src/public',
+                        dest: 'dist',
                         src: [
                             '**/*.js',
                             '**/*.html',
@@ -90,6 +92,15 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
+                        dot: true,
+                        cwd: 'src/core',
+                        dest: 'dist',
+                        src: [
+                            '**/*.js'
+                        ]
+                    },
+                    {
+                        expand: true,
                         cwd: '.tmp/images',
                         dest: '<%= yeoman.dist %>/images',
                         src: [
@@ -99,7 +110,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: '.tmp/fonts',
-                        dest: '<%= yeoman.dist %>/fonts',
+                        dest: 'dist/fonts',
                         src: [
                             '*'
                         ]
@@ -107,7 +118,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: '.tmp/scripts',
-                        dest: '<%= yeoman.dist %>/scripts',
+                        dest: 'dist/scripts',
                         src: [
                             '*.js'
                         ]
@@ -115,7 +126,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: '.tmp/styles',
-                        dest: '<%= yeoman.dist %>/styles',
+                        dest: 'dist/styles',
                         src: [
                             '*.css'
                         ]
@@ -124,19 +135,19 @@ module.exports = function (grunt) {
             },
             images: {
                 expand: true,
-                cwd: '<%= yeoman.app %>/images',
+                cwd: 'src/public/images',
                 dest: '.tmp/images/',
                 src: '{,*/}*.{gif,webp,png,jpg}'
             },
             styles: {
                 expand: true,
-                cwd: '<%= yeoman.app %>/styles',
+                cwd: 'src/public/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
             },
             fonts: {
                 expand: true,
-                cwd: '<%= yeoman.app %>/bower_components/bootstrap/dist/fonts',
+                cwd: 'src/public/bower_components/bootstrap/dist/fonts',
                 dest: '.tmp/fonts/',
                 src: '{,*/}*.*'
             },
@@ -158,7 +169,7 @@ module.exports = function (grunt) {
                 out: './'
             },
             javascript: [
-                'src/**/*.js', '!src/bower_components/**/*.js', 'README.md'
+                'src/**/*.js', '!src/public/bower_components/**/*.js', 'README.md'
             ]
         },
         jshint: {
@@ -168,7 +179,7 @@ module.exports = function (grunt) {
             all: [
                 'Gruntfile.js',
                 'src/**/*.js',
-                '!src/bower_components/**/*.js',
+                '!**/bower_components/**/*.js',
                 'test/**/*.js'
             ]
         },
@@ -186,21 +197,29 @@ module.exports = function (grunt) {
             main: {
                 opions: {
                     paths: [
-                        'src'
+                        'src/public'
                     ]
                 },
                 files: {
-                    '.tmp/styles/main.css': 'src/styles/main.less'
+                    '.tmp/styles/main.css': 'src/public/styles/main.less'
                 }
+            }
+        },
+        mochaTest: {
+            test: {
+                options: {
+                    reporter: 'spec'
+                },
+                src: ['test/unit/server/**/*.js']
             }
         },
         ngtemplates: {
             '4yf': {
-                src: 'src/views/**/*.html',
+                src: 'src/public/views/**/*.html',
                 dest: '.tmp/scripts/templates.js',
                 options: {
                     url: function (url) {
-                        return url.replace(/(src\/views\/([\s\S]*?)\/)/, '').replace(/.html/, '');
+                        return url.replace(/(src\/public\/views\/([\s\S]*?)\/)/, '').replace(/.html/, '');
                     }
                 }
             }
@@ -208,23 +227,22 @@ module.exports = function (grunt) {
         processhtml: {
             dev: {
                 files: {
-                    '.tmp/index.html': ['src/index.html']
+                    '.tmp/index.html': ['src/public/index.html']
                 }
             },
             dist: {
                 files: {
-                    'dist/index.html': ['src/index.html']
+                    'dist/index.html': ['src/public/index.html']
                 }
             }
         },
         uglify: {
             dist: {
                 files: {
-                    'dist/enofjs/min.class.js': [
-                        'src/ClassFactory.js'
-                    ],
-                    'dist/enofjs/min.enof.js': [
-                        'src/*.js'
+                    'dist/4yf/min.widgets.js': [
+                        'src/core/**/*.js',
+                        'src/public/**/*.js',
+                        '!**/bower_components/**'
                     ]
                 }
             }
@@ -252,9 +270,9 @@ module.exports = function (grunt) {
                 files: [
                     'src/index.html',
                     '.tmp/**/*.*',
-                    'src/models/{,*/}*.js',
-                    'src/viewModels/{,*/}*.js',
-                    'src/widgets/**/{,*/}*.js',
+                    'src/core/models/**/*.js',
+                    'src/public/viewModels/**/*.js',
+                    'src/public/widgets/**/*.js',
                     'src/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             },
@@ -267,9 +285,18 @@ module.exports = function (grunt) {
             karma: {
                 files: [
                     'src/**/*.js',
-                    'test/unit/**/*.js'
+                    '!src/server/**',
+                    'test/unit/**/*.js',
+                    '!test/unit/server/**'
                 ],
                 tasks: ['karma:unitAuto:run']
+            },
+            mocha: {
+                files: [
+                    'src/server/**/*.js',
+                    'test/unit/server/**/*.js'
+                ],
+                tasks: ['mochaTest:test']
             },
             styles: {
                 files: [
@@ -288,20 +315,23 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build',
         'Build all necessary files to actually be able to run the application',
-        [
-            'version',
-            'ngtemplates',
-            'processhtml',
-            'less'
-        ]);
+        function executeBuild() {
+            require('time-grunt')(grunt);
+            grunt.task.run([
+                'version',
+                'ngtemplates',
+                'processhtml',
+                'less'
+            ]);
+        });
 
     grunt.registerTask('test',
         'Testing jshint, unit and e2e tests',
         function executeTests() {
-            require('time-grunt')(grunt);
             grunt.task.run([
                 'jshint',
                 'karma:unit',
+                'mochaTest:test',
                 'uglify'
             ]);
         });
