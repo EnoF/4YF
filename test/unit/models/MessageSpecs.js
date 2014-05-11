@@ -15,7 +15,7 @@
 
         beforeEach(inject(function standardMessage(_User_, Message) {
             User = _User_;
-            var user = new User('EnoF');
+            var user = new User(0, 'EnoF', 'enof@github.com');
             message = new Message(user, 'Hello world!');
         }));
 

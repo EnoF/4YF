@@ -17,6 +17,7 @@
         "grunt-contrib-uglify": "^0",
         "grunt-contrib-watch": "^0",
         "grunt-karma-coveralls": "^2",
+        "grunt-mocha-test": "^0",
         "grunt-groc": "^0",
         "grunt-karma": "^0",
         "grunt-processhtml": "^0",
@@ -27,9 +28,11 @@
         "karma-jasmine": "^0",
         "karma-phantomjs-launcher": "^0",
         "time-grunt": "^0",
-        "grunt-mocha-test": "^0",
-        "express": "^4",
-        "supertest": "^0"
+        "socket.io": "^0",
+        "socket.io-client": "^0",
+        "supertest": "^0",
+        "express.io": "^1",
+        "should": "~3.3.1"
     },
     "engines": {
         "node": "^0",

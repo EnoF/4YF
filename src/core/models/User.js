@@ -12,6 +12,9 @@
     app.factory('User', function UserFactory() {
         function User() {
             this.private = {
+                id: {
+                    get: null
+                },
                 userName: {
                     getSet: null
                 },
@@ -20,7 +23,8 @@
                 }
             };
 
-            this.constructor = function constructor(userName, email) {
+            this.constructor = function constructor(id, userName, email) {
+                this.private.id = id;
                 this.private.userName = userName;
                 this.private.email = email;
             };

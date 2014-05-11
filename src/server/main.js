@@ -8,6 +8,7 @@
     'use strict';
 
     var app = express();
+    app.http().io();
 
     // Set the allow cross origin headers so the server can be reached from other domain clients.
     function allowCrossDomain(req, res, next) {
@@ -37,8 +38,12 @@
         }, 200);
     });
 
-    app.listen(3000);
+    app.listen(1234);
+
+    app.io.sockets.on('connection', function onConnect(socket) {
+        socket.emit('channels', ['general', 'random']);
+    });
 
     module.exports = app;
 
-}(require('express')));
+}(require('express.io')));

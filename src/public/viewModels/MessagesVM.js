@@ -13,8 +13,8 @@
         $scope.messages = [];
 
         // For demo purpose we now create some messages hard coded!
-        var enof = new User('EnoF', 'enof@github.com');
-        var andor = new User('AndOr', 'andor@github.com');
+        var enof = new User(0, 'EnoF', 'enof@github.com');
+        var andor = new User(1, 'AndOr', 'andor@github.com');
 
         // A fake conversation for demo purpose!
         $scope.messages.push(new Message(enof, 'Hello!'));
