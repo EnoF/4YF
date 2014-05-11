@@ -1,42 +1,26 @@
 /*
  * For Your Feed (4YF)
- * Version: 0.1.0
+ * Version: 0.0.1
  *
  * Copyright (c) 2014.
  */
-(function mainSpecsScope() {
+(function channelSpecsScope() {
     'use strict';
 
-    var request = require('supertest');
     var io = require('socket.io-client');
-    var app = require('../../../src/server/main.js');
 
-    describe('message feed', function () {
+    describe('Channel Resource', function channelSpecs() {
 
         var socket;
 
         beforeEach(function connectToSocket(done) {
-            socket = io.connect('http://localhost:1234', {
+            socket = io.connect('http://localhost:6667', {
                 transports: ['websocket'],
                 'reconnection delay': 0,
                 'reopen delay': 0,
                 'force new connection': true
             });
             socket.on('connect', done);
-        });
-
-        it('should retrieve a message feed', function (done) {
-            request(app)
-                .get('/feed')
-                .expect(200)
-                .expect({
-                    messages: [
-                        {
-                            user: 'EnoF',
-                            message: 'Hello!'
-                        }
-                    ]
-                }, done);
         });
 
         it('should retrieve available channels when connected', function retrieveChannels(done) {
