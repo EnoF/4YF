@@ -27,6 +27,7 @@ module.exports = function (config) {
 
         // list of files / patterns to exclude
         exclude: [
+            'src/core/models/index.js',
             'test/unit/server/**/*.js'
         ],
 
@@ -59,8 +60,9 @@ module.exports = function (config) {
             // source files, that you wanna generate coverage for
             // do not include tests or libraries
             // (these files will be instrumented by Istanbul)
-            'src/models/**/*.js': ['coverage'],
-            'src/viewModels/**/*.js': ['coverage']
+            '!src/core/models/index.js': ['coverage'],
+            'src/core/models/**/*.js': ['coverage'],
+            'src/public/viewModels/**/*.js': ['coverage']
         },
 
         // optionally, configure the reporter

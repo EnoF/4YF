@@ -4,28 +4,45 @@
  *
  * Copyright (c) 2014.
  */
-(function MessageScope(angular, clazz) {
+(function MessageScope(window, undefined) {
     'use strict';
 
-    var app = angular.module('4yf');
+    var clazz;
+    var angular;
+    var app;
 
-    app.factory('Message', function MessageFactory() {
-        function Message() {
-            this.private = {
-                user: {
-                    getSet: null
-                },
-                message: {
-                    getSet: null
-                }
-            };
+    /* istanbul ignore else */
+    if (window !== undefined) {
+        clazz = window.clazz;
+        angular = window.angular;
+        app = angular.module('4yf');
+    } else {
+        clazz = require('enofjs').clazz;
+    }
 
-            this.constructor = function constructor(user, message) {
-                this.private.user = user;
-                this.private.message = message;
-            };
-        }
+    var Message = clazz(function Message() {
+        this.private = {
+            user: {
+                getSet: null
+            },
+            message: {
+                getSet: null
+            }
+        };
 
-        return clazz(Message);
+        this.constructor = function constructor(user, message) {
+            this.private.user = user;
+            this.private.message = message;
+        };
     });
-}(window.angular, window.clazz));
+
+    /* istanbul ignore else */
+    if (window !== undefined) {
+        app.factory('Message', function MessageFactory() {
+            return Message;
+        });
+    } else {
+        module.exports = Message;
+    }
+
+}(this.window));

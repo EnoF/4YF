@@ -4,9 +4,10 @@
  *
  * Copyright (c) 2014.
  */
-(function feedScope() {
+(function feedScope(clazz) {
     'use strict';
 
+    console.log(clazz);
     // Load the `feed` resource into the app.
     function loadFeedResource(app) {
         app.get('/feed', getFeed);
@@ -30,4 +31,4 @@
     }
 
     module.exports = loadFeedResource;
-}());
+}(require('enofjs').clazz));

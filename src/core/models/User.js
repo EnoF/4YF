@@ -4,32 +4,48 @@
  *
  * Copyright (c) 2014.
  */
-(function UserScope(angular, clazz) {
+(function UserScope(window, undefined) {
     'use strict';
 
-    var app = angular.module('4yf');
+    var clazz;
+    var angular;
+    var app;
 
-    app.factory('User', function UserFactory() {
-        function User() {
-            this.private = {
-                id: {
-                    get: null
-                },
-                userName: {
-                    getSet: null
-                },
-                email: {
-                    getSet: null
-                }
-            };
+    /* istanbul ignore else */
+    if (window !== undefined) {
+        clazz = window.clazz;
+        angular = window.angular;
+        app = angular.module('4yf');
+    } else {
+        clazz = require('enofjs').clazz;
+    }
 
-            this.constructor = function constructor(id, userName, email) {
-                this.private.id = id;
-                this.private.userName = userName;
-                this.private.email = email;
-            };
-        }
+    var User = clazz(function User() {
+        this.private = {
+            id: {
+                get: null
+            },
+            userName: {
+                getSet: null
+            },
+            email: {
+                getSet: null
+            }
+        };
 
-        return clazz(User);
+        this.constructor = function constructor(id, userName, email) {
+            this.private.id = id;
+            this.private.userName = userName;
+            this.private.email = email;
+        };
     });
-}(window.angular, window.clazz));
+
+    /* istanbul ignore else */
+    if (window !== undefined) {
+        app.factory('User', function UserFactory() {
+            return User;
+        });
+    } else {
+        module.exports = User;
+    }
+}(this.window));
