@@ -30,5 +30,33 @@
             });
             socket.emit('connect');
         });
+
+        it('should be able to register the user name', function registerUserName(done) {
+            socket.on('me', function response(data) {
+                data.should.containDeep({
+                    id: 1,
+                    userName: 'EnoF',
+                    email: 'enof@github.com'
+                });
+                done();
+            });
+            socket.emit('login', {
+                userName: 'EnoF',
+                email: 'enof@github.com'
+            });
+        });
+
+        it('should retrieve a message in a specific room', function retrieveMessage(done) {
+            socket.on('message', function response(data) {
+                data.should.containDeep({message: 'Hello world!'});
+                done();
+            });
+            socket.emit('join', {
+                channel: 'general'
+            });
+            socket.emit('message', {
+                message: 'Hello world!'
+            });
+        });
     });
 }());
