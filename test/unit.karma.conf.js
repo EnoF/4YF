@@ -17,8 +17,7 @@ module.exports = function (config) {
         files: [
             'src/public/bower_components/angular/angular.js',
             'src/public/bower_components/angular-mocks/angular-mocks.js',
-            'src/public/bower_components/enofjs/src/ClassFactory.js',
-            'src/public/bower_components/enofjs/src/whereIt.js',
+            'src/public/bower_components/enofjs/src/*.js',
             'src/public/app.js',
             'src/core/models/**/*.js',
             'src/public/viewModels/**/*.js',

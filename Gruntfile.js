@@ -294,6 +294,7 @@ module.exports = function (grunt) {
             },
             mocha: {
                 files: [
+                    'src/core/**/*.js',
                     'src/server/**/*.js',
                     'test/unit/server/**/*.js'
                 ],

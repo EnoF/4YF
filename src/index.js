@@ -8,7 +8,7 @@
     'use strict';
 
     module.exports = {
-        Message: require('./Message.js'),
-        User: require('./User.js')
+        Message: require('./core/models/Message.js'),
+        User: require('./core/models/User.js')
     };
 }(require));

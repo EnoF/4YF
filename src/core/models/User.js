@@ -21,6 +21,9 @@
     }
 
     var User = clazz(function User() {
+
+        this.extend = 'Serializable';
+
         this.private = {
             id: {
                 get: null
@@ -34,9 +37,13 @@
         };
 
         this.constructor = function constructor(id, userName, email) {
-            this.private.id = id;
-            this.private.userName = userName;
-            this.private.email = email;
+            if (id instanceof Object) {
+                this.super(id);
+            } else {
+                this.private.id = id;
+                this.private.userName = userName;
+                this.private.email = email;
+            }
         };
     });
 

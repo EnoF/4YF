@@ -26,6 +26,7 @@
         "expect": false,
         "inject": false,
         "module": false,
+        "require": false,
         "DEBUG": false
     }
 }
