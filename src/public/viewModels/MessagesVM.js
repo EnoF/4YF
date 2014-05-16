@@ -8,21 +8,14 @@
     'use strict';
 
     var app = angular.module('4yf');
-    var User = require('User');
-    var Message = require('Message');
+
+    var channelSocket = require('channelSocket');
 
     app.viewModel('MessagesVM', function MessagesVM($scope) {
-        $scope.messages = [];
+        $scope.messages = channelSocket.getMessages();
 
-        // For demo purpose we now create some messages hard coded!
-        var enof = new User(0, 'EnoF', 'enof@github.com');
-        var andor = new User(1, 'AndOr', 'andor@github.com');
-
-        // A fake conversation for demo purpose!
-        $scope.messages.push(new Message(enof, 'Hello!'));
-        $scope.messages.push(new Message(andor, 'Howdy!'));
-        $scope.messages.push(new Message(enof, 'How are you?'));
-        $scope.messages.push(new Message(andor, 'Awesome!'));
-
+        channelSocket.join('general', function notifyMe() {
+            $scope.$apply();
+        });
     });
 }(window.angular));

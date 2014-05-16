@@ -16,8 +16,10 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             'src/public/bower_components/angular/angular.js',
+            'src/public/bower_components/socket.io-client/dist/socket.io.js',
             'src/public/bower_components/enofjs/dist/enofjs/min.enof.js',
             'src/public/bower_components/angular-mocks/angular-mocks.js',
+            'src/core/services/**/*.js',
             'src/public/app.js',
             'src/core/models/**/*.js',
             'src/public/viewModels/**/*.js',
@@ -27,7 +29,6 @@ module.exports = function (config) {
         // list of files / patterns to exclude
         exclude: [
             'src/core/models/index.js',
-            'src/core/services/**/*.js',
             'test/unit/server/**/*.js'
         ],
 

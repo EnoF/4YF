@@ -4,7 +4,7 @@
  *
  * Copyright (c) 2014.
  */
-(function appScope(angular) {
+(function appScope(angular, window) {
     'use strict';
 
     var app = angular.module('4yf', []);
@@ -13,4 +13,13 @@
     // we rename it into ViewModel to keep things semantically correct!
     app.viewModel = app.controller;
 
-}(window.angular));
+    var io = require('io');
+    var socket = io.connect('http://localhost:6697');
+    var ChannelSocket = require('ChannelSocket', {
+        transports: ['websocket']
+    });
+    var channelSocket = new ChannelSocket(socket);
+
+    window.exports(null, channelSocket, 'channelSocket');
+
+}(window.angular, require('enofjs')));

@@ -13,7 +13,7 @@
         app.use(allowCrossDomain);
         require('./feed.js')(app);
 
-        app.listen(6667);
+        app.listen(6697);
     }
 
     // Set the allow cross origin headers so the server can be reached from other domain clients.

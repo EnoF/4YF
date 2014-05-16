@@ -49,7 +49,7 @@
                 this.private.socket.emit('me', this.private.user.serialize());
             },
             onMessage: function onMessage(message) {
-                this.private.io.sockets.in('general').emit('message', message);
+                this.private.io.sockets.in(message.channel).emit('message', message);
             },
             onJoin: function onJoin(channel) {
                 this.private.socket.join(channel.channel);

@@ -21,8 +21,8 @@
         }));
 
         it('should contain a demo array of messages', function arrayFilled() {
+
             expect(scope.messages instanceof Array).toEqual(true);
-            expect(scope.messages.length).toBeGreaterThan(1);
         });
     });
 }());

@@ -41,6 +41,7 @@ module.exports = function (grunt) {
             livereload: {
                 options: {
                     middleware: function (connect) {
+                        require('./src/server/main.js');
                         return [
                             lrSnippet,
                             mountFolder(connect, '.tmp'),
@@ -272,6 +273,7 @@ module.exports = function (grunt) {
                     'src/index.html',
                     '.tmp/**/*.*',
                     'src/core/models/**/*.js',
+                    'src/core/services/**/*.js',
                     'src/public/viewModels/**/*.js',
                     'src/public/widgets/**/*.js',
                     'src/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -279,7 +281,7 @@ module.exports = function (grunt) {
             },
             ngtemplates: {
                 files: [
-                    'src/views/**/*.html'
+                    'src/public/views/**/*.html'
                 ],
                 tasks: ['ngtemplates']
             },
@@ -308,7 +310,7 @@ module.exports = function (grunt) {
             },
             updateIndex: {
                 files: [
-                    'src/index.html'
+                    'src/public/index.html'
                 ],
                 tasks: ['processhtml']
             }
