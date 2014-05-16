@@ -4,11 +4,12 @@
  *
  * Copyright (c) 2014.
  */
-(function modelIndexScope(require) {
+(function coreIndexScope(require) {
     'use strict';
 
     module.exports = {
         Message: require('./core/models/Message.js'),
-        User: require('./core/models/User.js')
+        User: require('./core/models/User.js'),
+        ChannelSocket: require('./core/services/ChannelSocket.js')
     };
 }(require));

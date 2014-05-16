@@ -27,6 +27,7 @@ module.exports = function (config) {
         // list of files / patterns to exclude
         exclude: [
             'src/core/models/index.js',
+            'src/core/services/**/*.js',
             'test/unit/server/**/*.js'
         ],
 

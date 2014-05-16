@@ -8,10 +8,11 @@
     'use strict';
 
     var io = require('socket.io-client');
+    var ChannelSocket = require('../index.js').ChannelSocket;
 
     describe('Channel Resource', function channelSpecs() {
 
-        var socket;
+        var socket, channel;
 
         beforeEach(function connectToSocket(done) {
             socket = io.connect('http://localhost:6667', {
@@ -21,6 +22,7 @@
                 'force new connection': true
             });
             socket.on('connect', done);
+            channel = new ChannelSocket(socket);
         });
 
         it('should retrieve available channels when connected', function retrieveChannels(done) {
@@ -51,12 +53,8 @@
                 data.should.containDeep({message: 'Hello world!'});
                 done();
             });
-            socket.emit('join', {
-                channel: 'general'
-            });
-            socket.emit('message', {
-                message: 'Hello world!'
-            });
+            channel.join('general');
+            channel.sendMessage('Hello world!');
         });
     });
 }());
