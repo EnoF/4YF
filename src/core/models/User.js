@@ -4,21 +4,10 @@
  *
  * Copyright (c) 2014.
  */
-(function UserScope(window, undefined) {
+(function UserScope(window) {
     'use strict';
 
-    var clazz;
-    var angular;
-    var app;
-
-    /* istanbul ignore else */
-    if (window !== undefined) {
-        clazz = window.clazz;
-        angular = window.angular;
-        app = angular.module('4yf');
-    } else {
-        clazz = require('enofjs').clazz;
-    }
+    var clazz = window.clazz;
 
     var User = clazz(function User() {
 
@@ -47,12 +36,5 @@
         };
     });
 
-    /* istanbul ignore else */
-    if (window !== undefined) {
-        app.factory('User', function UserFactory() {
-            return User;
-        });
-    } else {
-        module.exports = User;
-    }
-}(this.window));
+    window.exports(module, User, 'User');
+}(require('enofjs')));

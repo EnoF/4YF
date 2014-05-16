@@ -4,21 +4,10 @@
  *
  * Copyright (c) 2014.
  */
-(function MessageScope(window, undefined) {
+(function MessageScope(window) {
     'use strict';
 
-    var clazz;
-    var angular;
-    var app;
-
-    /* istanbul ignore else */
-    if (window !== undefined) {
-        clazz = window.clazz;
-        angular = window.angular;
-        app = angular.module('4yf');
-    } else {
-        clazz = require('enofjs').clazz;
-    }
+    var clazz = window.clazz;
 
     var Message = clazz(function Message() {
         this.private = {
@@ -36,13 +25,5 @@
         };
     });
 
-    /* istanbul ignore else */
-    if (window !== undefined) {
-        app.factory('Message', function MessageFactory() {
-            return Message;
-        });
-    } else {
-        module.exports = Message;
-    }
-
-}(this.window));
+    window.exports(module, Message, 'Message');
+}(require('enofjs')));

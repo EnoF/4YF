@@ -9,12 +9,13 @@
 
     describe('Message Model Specs', function MessageSpecsScope() {
 
-        var message, User;
+        var message, User, Message;
 
         beforeEach(module('4yf'));
 
-        beforeEach(inject(function standardMessage(_User_, Message) {
-            User = _User_;
+        beforeEach(inject(function standardMessage() {
+            User = require('User');
+            Message = require('Message');
             var user = new User(0, 'EnoF', 'enof@github.com');
             message = new Message(user, 'Hello world!');
         }));

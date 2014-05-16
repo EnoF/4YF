@@ -8,8 +8,10 @@
     'use strict';
 
     var app = angular.module('4yf');
+    var User = require('User');
+    var Message = require('Message');
 
-    app.viewModel('MessagesVM', function MessagesVM($scope, User, Message) {
+    app.viewModel('MessagesVM', function MessagesVM($scope) {
         $scope.messages = [];
 
         // For demo purpose we now create some messages hard coded!

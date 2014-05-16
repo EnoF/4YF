@@ -16,8 +16,8 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             'src/public/bower_components/angular/angular.js',
+            'src/public/bower_components/enofjs/dist/enofjs/min.enof.js',
             'src/public/bower_components/angular-mocks/angular-mocks.js',
-            'src/public/bower_components/enofjs/src/*.js',
             'src/public/app.js',
             'src/core/models/**/*.js',
             'src/public/viewModels/**/*.js',

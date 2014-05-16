@@ -7,7 +7,7 @@
     ],
     "devDependencies": {
         "connect-livereload": "^0",
-        "enofjs": "^1",
+        "enofjs": "^2",
         "grunt": "^0",
         "grunt-angular-templates": "^0",
         "grunt-concurrent": "^0",
