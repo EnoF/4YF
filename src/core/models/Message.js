@@ -10,12 +10,22 @@
     var clazz = window.clazz;
 
     var Message = clazz(function Message() {
+
         this.private = {
             user: {
                 getSet: null
             },
             message: {
                 getSet: null
+            }
+        };
+
+        this.public = {
+            serialize: function serialize() {
+                return {
+                    user: this.private.user.getId(),
+                    message: this.private.message
+                };
             }
         };
 

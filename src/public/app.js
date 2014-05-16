@@ -4,7 +4,7 @@
  *
  * Copyright (c) 2014.
  */
-(function appScope(angular, window) {
+(function appScope(angular) {
     'use strict';
 
     var app = angular.module('4yf', []);
@@ -13,7 +13,4 @@
     // we rename it into ViewModel to keep things semantically correct!
     app.viewModel = app.controller;
 
-    var io = require('io');
-
-
-}(window.angular, window));
+}(window.angular));

@@ -8,7 +8,8 @@
     'use strict';
 
     var io = require('socket.io-client');
-    var ChannelSocket = require('../index.js').ChannelSocket;
+    var modules = require('../index.js');
+    var ChannelSocket = modules.ChannelSocket;
 
     describe('Channel Resource', function channelSpecs() {
 
@@ -48,6 +49,20 @@
             });
         });
 
+        it('should retrieve previous messages from the channel', function history(done) {
+            socket.on('history', function retrieveHistory() {
+                setTimeout(function wait1ms() {
+                    var messages = channel.getMessages();
+                    messages.should.be.an.Array.and.containEql({
+                        user: 0,
+                        message: 'History Message'
+                    });
+                    done();
+                }, 0);
+            });
+            channel.join('general');
+        });
+
         it('should retrieve a message in a specific room', function retrieveMessage(done) {
             socket.on('message', function response(data) {
                 data.should.containDeep({message: 'Hello world!'});
@@ -56,5 +71,6 @@
             channel.join('general');
             channel.sendMessage('Hello world!');
         });
+
     });
 }());

@@ -13,6 +13,7 @@
     var clazz = enofjs.clazz;
     var LinkedHashMap = enofjs.LinkedHashMap;
     var User = models.User;
+    var Message = models.Message;
 
     function loadChannelResource(io) {
 
@@ -52,6 +53,11 @@
             },
             onJoin: function onJoin(channel) {
                 this.private.socket.join(channel.channel);
+                var user = new User(0, 'EnoF', 'enof@github.com');
+                var message = new Message(user, 'History Message');
+                this.private.socket.emit('history', {
+                    messages: [message.serialize()]
+                });
             },
             openListeners: function openListeners() {
                 var socket = this.private.socket;
