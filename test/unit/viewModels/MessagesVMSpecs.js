@@ -21,8 +21,14 @@
         }));
 
         it('should contain a demo array of messages', function arrayFilled() {
-
             expect(scope.messages instanceof Array).toEqual(true);
+        });
+
+        it('should send a message', function sendMessage() {
+            var channelSpy = window.spyOn(require('channelSocket'), 'sendMessage');
+            scope.message = 'Testing';
+            scope.sendMessage();
+            expect(channelSpy).toHaveBeenCalledWith('Testing', 'general');
         });
     });
 }());

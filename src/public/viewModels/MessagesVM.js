@@ -12,10 +12,16 @@
     var channelSocket = require('channelSocket');
 
     app.viewModel('MessagesVM', function MessagesVM($scope) {
+        $scope.channel = 'general';
+        $scope.message = null;
         $scope.messages = channelSocket.getMessages();
 
-        channelSocket.join('general', function notifyMe() {
+        channelSocket.join($scope.channel, function notifyMe() {
             $scope.$apply();
         });
+
+        $scope.sendMessage = function sendMessage() {
+            channelSocket.sendMessage($scope.message, $scope.channel);
+        };
     });
 }(window.angular));

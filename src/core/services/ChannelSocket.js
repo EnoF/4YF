@@ -4,7 +4,7 @@
  *
  * Copyright (c) 2014.
  */
-(function ChannelSocketScope(window, core) {
+(function ChannelSocketScope(window) {
     'use strict';
 
     var clazz = window.clazz;
@@ -14,7 +14,7 @@
             socket: {
                 getSet: null
             },
-            name: {
+            channels: {
                 getSet: null
             },
             messages: {
@@ -30,8 +30,12 @@
                 }
             },
             onMessage: function onMessage(message) {
-                var Message = core.Message;
-                this.private.messages.push(new Message(message));
+                var models = require('../../index.js');
+                var Message = models.Message;
+                var User = models.User;
+                var user = new User(0, 'EnoF');
+                this.private.messages.push(new Message(user, message.message));
+                this.private.notify();
             },
             populateHistory: function populateHistory(history) {
                 var models = require('../../index.js');
@@ -47,11 +51,17 @@
             subscribeChannel: function subscribeChannel() {
                 this.private.socket.on('history',
                     this.private.populateHistory.bindScope(this));
+                this.private.socket.on('message',
+                    this.private.onMessage.bindScope(this));
             }
         };
 
         this.public = {
             join: function join(channel, handler) {
+                if (channel in this.private.channels) {
+                    return;
+                }
+                this.private.channels[channel] = true;
                 this.private.socket.emit('join', {
                     channel: channel
                 });
@@ -70,6 +80,7 @@
 
         this.constructor = function constructor(socket) {
             this.private.socket = socket;
+            this.private.channels = {};
         };
     }
 
