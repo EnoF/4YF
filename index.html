@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><title>index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="index"><meta name="groc-project-path" content="README.md"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path">README.md</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="for-your-feed-4yf">For Your Feed (4YF)</h1>
+
+<p><a href="https://drone.io/github.com/EnoF/4YF/latest"><img src="https://drone.io/github.com/EnoF/4YF/status.png" alt="Build Status" title="" /></a>
+<a href="https://codeclimate.com/github/EnoF/4YF"><img src="https://codeclimate.com/github/EnoF/4YF.png" alt="Code Climate" title="" /></a>
+<a href="https://coveralls.io/r/EnoF/4YF?branch=master"><img src="https://coveralls.io/repos/EnoF/4YF/badge.png?branch=master" alt="Coverage Status" title="" /></a></p>
+
+<p>4YF is a Chat client with focus on the messages for the user!</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>Fork and clone the project.</p>
+
+<p>Make sure to install a version of <code>nodejs</code> higher then <code>0.10</code>.</p>
+
+<p>In the directory where the Gruntfile.js relies, run the following commands:</p>
+
+<pre><code>npm install -g grunt-cli
+npm install -g bower
+npm install
+bower install
+</code></pre>
+
+<p>You are ready to go!</p>
+
+<h1 id="running-the-server">Running the server</h1>
+
+<p>To run the server including serving frontend pages, run the following command:</p>
+
+<pre><code>grunt run
+</code></pre>
+
+<p>You can now connect to the client at: <code>http://localhost:9000</code>.</p>
+
+<p>You can now connect to the server at: <code>http://localhost:3000</code>.</p>
+
+<h1 id="droneio">Drone.io</h1>
+
+<p>To connect to your <a href="https://drone.io/">drone.io</a> account, sign up for free!
+<em>This is an optional step, you can skip if you wish.</em></p>
+
+<h3 id="setup">Setup</h3>
+
+<p>On the setup tab set the correct environment variables:</p>
+
+<pre><code>GH_REF=github.com/[your github username]/4YF.git
+GH_TOKEN=[your github oauth token]
+COVERALLS_SERVICE_NAME=drone.io
+COVERALLS_SERVICE_JOB_ID=$BUILD_ID
+COVERALLS_REPO_TOKEN=[your coveralls repository token]
+COVERALLS_GIT_COMMIT=$GIT_COMMIT
+</code></pre>
+
+<p>Enter the following commands:</p>
+
+<pre><code>npm install -g bower
+npm install -g grunt-cli
+sudo pip install Pygments
+npm install
+bower install
+grunt test
+grunt coveralls
+git checkout master
+grunt groc
+rm -rf src/**/*.js test .jshintrc bower.json package.json
+git config user.name "done.io CI"
+git config user.email "[your email used for the commit]"
+git add -A
+git commit -m "Automatically updated the groc documentation via drone.io"
+git push -f --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+</code></pre>
+
+<p>This will test the application on each of your commits! It will also update your documentation on your gh-pages and
+update the code coverage on your <code>coveralls</code> account!</p></div></div></div></div></body></html>
